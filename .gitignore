@@ -1,0 +1,14 @@
+# 输出文件（图片太大）
+output/
+
+# 文章（私有内容）
+articles/
+
+# 临时文件
+*.pyc
+__pycache__/
+.DS_Store
+
+# 环境变量
+.env
+.env.local
