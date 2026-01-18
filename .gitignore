@@ -4,11 +4,32 @@ output/
 # 文章（私有内容）
 articles/
 
+# 用户自定义配置
+.claude-skills/
+.baoyu-skills/
+
 # 临时文件
 *.pyc
 __pycache__/
 .DS_Store
+*.swp
+*.swo
+*~
 
 # 环境变量
 .env
 .env.local
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# 日志
+*.log
+logs/
+
+# 依赖
+node_modules/
+venv/
+__pycache__/
