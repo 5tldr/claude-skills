@@ -1,295 +1,177 @@
 ---
 name: article-image-generator
-description: 为公众号/博客文章自动生成配图方案和 AI 绘图 Prompt
+description: 为文章生成配图，输入文章内容，直接输出可用的 Midjourney Prompt
 ---
 
-# 公众号文章配图生成器
+# 文章配图生成器
 
-> 基于 [mrgoonie/claudekit-skills](https://github.com/mrgoonie/claudekit-skills) 的 ai-multimodal 和 aesthetic skills 整理
+## 你要做什么
 
-## 任务
+输入文章内容，我会：
+1. 分析文章结构，建议配图位置
+2. 为每个位置生成简洁的 Midjourney Prompt
+3. 你复制 Prompt 到 Midjourney，生成图片
 
-分析文章内容，自动生成完整的配图方案，包含：
-1. 配图位置和数量建议
-2. 每张图的设计说明
-3. 可直接使用的 AI 绘图 Prompt（支持 Midjourney / DALL-E / Stable Diffusion / Imagen）
+## 怎么用
 
-## 输入
+**最简单的用法**：
+```
+帮我为这篇文章生成配图：
 
-- **文章内容**：Markdown 格式的文章
-- **配图风格**（可选）：
-  - `flat` - 扁平插画风格（默认）
-  - `3d` - 3D 渲染风格
-  - `tech` - 科技感风格
-  - `minimal` - 极简风格
-  - `photo` - 写实照片风格
-- **品牌色**（可选）：主色调 HEX 值，如 `#6366F1`
-- **图片尺寸**：
-  - 封面图：900×383（公众号封面比例）
-  - 正文图：1080×720 或 1:1
+[粘贴你的文章内容]
+```
 
-## 输出格式
+**指定风格**（可选）：
+```
+帮我为这篇文章生成配图，风格：扁平插画
+
+[粘贴你的文章内容]
+```
+
+## 支持的风格
+
+- **扁平插画**（默认）：适合大部分文章，色彩明快
+- **3D 渲染**：适合产品介绍、科技内容
+- **极简风格**：适合专业、商务内容
+- **科技感**：适合 AI、编程、技术文章
+- **写实照片**：适合生活、情感类内容
+
+## 我会输出什么
+
+简洁的配图方案，每张图包含：
 
 ```markdown
-# 📸 配图方案
-
-## 概览
-
-| 序号 | 位置 | 类型 | 用途 |
-|------|------|------|------|
-| 1 | 封面 | [类型] | [用途说明] |
-| 2 | [章节名] | [类型] | [用途说明] |
-| ... | ... | ... | ... |
-
----
-
 ## 图 1：封面图
 
-### 设计说明
-- **核心信息**：[这张图要传达什么]
-- **视觉焦点**：[画面主体是什么]
-- **情绪基调**：[想要传达的情绪]
+**用途**：吸引读者点击
 
-### Midjourney Prompt
+**Midjourney Prompt**：
 ```
-[主体描述], [风格], [构图], [光线], [色彩]
---ar 900:383 --v 6.1 --s 200
+[简洁的英文描述], [风格关键词],
+clean composition, professional
+--ar 16:9 --v 6.1
 ```
 
-### DALL-E Prompt
-```
-[更自然语言的描述，包含风格和细节]
-```
-
-### Stable Diffusion Prompt
-```
-[正向提示词]
-Negative: [负向提示词]
-```
+**说明**：[一句话说明这张图的设计思路]
 
 ---
 
-## 图 2：[章节名]配图
+## 图 2：[位置]
 
-[同上格式...]
+**用途**：[说明用途]
+
+**Midjourney Prompt**：
+```
+[Prompt 内容]
 ```
 
-## 配图类型对照表
-
-| 文章内容类型 | 推荐配图类型 | 说明 |
-|-------------|-------------|------|
-| 痛点描述 | 场景图、情绪图 | 展示问题场景，引发共鸣 |
-| 解决方案 | 流程图、产品图 | 清晰展示方案 |
-| 数据对比 | 对比图、数据可视化 | Before/After 效果 |
-| 步骤说明 | 流程图、分步图 | 1-2-3 步骤展示 |
-| 概念解释 | 概念图、隐喻图 | 抽象概念可视化 |
-| 案例展示 | 截图、实拍图 | 真实案例增加可信度 |
-| 总结回顾 | 金句图、要点图 | 便于保存转发 |
+**说明**：[设计思路]
+```
 
 ## 配图数量建议
 
-| 文章长度 | 建议配图数 | 说明 |
-|----------|-----------|------|
-| <1000字 | 1-2张 | 封面 + 核心图 |
-| 1000-2000字 | 2-4张 | 封面 + 每个大章节1张 |
-| 2000-3000字 | 4-6张 | 封面 + 重点章节配图 |
-| >3000字 | 6-8张 | 避免过多，保持节奏 |
+- 短文（<1000字）：1-2 张
+- 中文（1000-2000字）：3-4 张
+- 长文（>2000字）：4-6 张
 
-## Prompt 模板库
+## 常用比例
 
-### 扁平插画风格 (flat)
-```
-[主体], flat illustration style, vector art, 
-clean lines, vibrant colors, minimal shadows,
-[构图], [背景色] background
---ar [比例] --v 6.1 --s 200
-```
+- **16:9**：横版封面，适合公众号、知乎
+- **3:4**：竖版，适合小红书、朋友圈
+- **1:1**：方图，适合 Instagram、微博
 
-### 3D 渲染风格 (3d)
-```
-[主体], 3D render, isometric view, 
-soft lighting, clay render style, 
-pastel colors, clean background
---ar [比例] --v 6.1 --s 250
-```
+## 风格参考
 
-### 科技感风格 (tech)
+### 扁平插画（默认）
 ```
-[主体], futuristic tech aesthetic,
-dark background with [品牌色] accents,
-glowing elements, holographic effects,
-cinematic lighting
---ar [比例] --v 6.1 --s 300
+flat illustration style, vector art, 
+clean lines, vibrant colors, minimal shadows
 ```
+适合：教程、科普、生活类
 
-### 极简风格 (minimal)
+### 3D 渲染
 ```
-[主体], minimalist design, 
-negative space, single accent color,
+3D render, isometric view, clay render style,
+soft lighting, pastel colors
+```
+适合：产品、科技、创意类
+
+### 极简风格
+```
+minimalist design, negative space,
 clean composition, white background
---ar [比例] --v 6.1 --s 150
 ```
+适合：商务、专业、高端类
 
-### 写实照片风格 (photo)
+### 科技感
 ```
-[主体], professional photography,
-shallow depth of field, natural lighting,
-high resolution, editorial style
---ar [比例] --v 6.1 --stylize 100
+futuristic tech aesthetic, dark background,
+glowing elements, neon accents
 ```
+适合：AI、编程、技术类
 
-## 封面图专用模板
-
-### 教程类封面
+### 写实照片
 ```
-Clean workspace with [主题元素] on screen,
-flat illustration, [品牌色] and white color scheme,
-modern tech aesthetic, soft ambient lighting
---ar 900:383 --v 6.1 --s 200
+professional photography, natural lighting,
+shallow depth of field, editorial style
 ```
-
-### 观点类封面
-```
-Abstract representation of [核心概念],
-bold geometric shapes, [品牌色] gradient,
-dynamic composition, minimal style
---ar 900:383 --v 6.1 --s 250
-```
-
-### 案例类封面
-```
-Split screen showing before and after,
-[场景描述], contrasting colors,
-professional clean style
---ar 900:383 --v 6.1 --s 200
-```
-
-## 配色建议
-
-### 科技/效率类
-- 主色：#6366F1（紫色）或 #3B82F6（蓝色）
-- 辅色：#F1F5F9（浅灰）
-- 强调：#10B981（绿色）
-
-### 创意/设计类
-- 主色：#EC4899（粉色）或 #F59E0B（橙色）
-- 辅色：#FEF3C7（米色）
-- 强调：#8B5CF6（紫色）
-
-### 商业/职场类
-- 主色：#1E40AF（深蓝）
-- 辅色：#F8FAFC（白色）
-- 强调：#059669（绿色）
-
-## 工作流程
-
-1. **分析文章结构**
-   - 提取标题、章节、核心观点
-   - 识别情绪转折点（痛点→方案→效果）
-
-2. **确定配图位置**
-   - 封面图：必须
-   - 痛点部分：场景图
-   - 方案部分：流程图/产品图
-   - 效果部分：对比图
-   - 总结部分：金句图（可选）
-
-3. **生成 Prompt**
-   - 根据配图类型选择模板
-   - 填入具体内容和风格参数
-   - 输出多平台 Prompt
-
-4. **迭代优化**（参考 aesthetic skill）
-   - 生成初版图片
-   - 评估：色彩准确性 >80%、构图清晰度 >85%、品牌一致性 >90%
-   - 未达标则调整 Prompt 重新生成
+适合：人物、生活、情感类
 
 ## 示例
 
-### 输入
-```markdown
-# 我用 Claude Skills 自动化了整个工作流
+**用户输入**：
+```
+帮我为这篇文章生成配图：
 
-写公众号最头疼的是什么？配图。
-每次写完文章，还要花 1-2 小时找图、做图...
+# 我用 AI 30 分钟做了 12 页漫画
 
-## 解决方案：Skills
-把经验写成文件，AI 自动调用...
-
-## 效果对比
-配图时间从 100 分钟 → 13 分钟
+传统漫画创作需要 2 周，但用 AI 只需要 30 分钟...
 ```
 
-### 输出
+**我的输出**：
 ```markdown
-# 📸 配图方案
-
-## 概览
-
-| 序号 | 位置 | 类型 | 用途 |
-|------|------|------|------|
-| 1 | 封面 | 概念图 | 展示"AI 自动配图"概念 |
-| 2 | 痛点部分 | 场景图 | 展示配图的痛苦 |
-| 3 | 方案部分 | 流程图 | 展示 Skill 工作流程 |
-| 4 | 效果部分 | 对比图 | Before/After 时间对比 |
-
----
-
 ## 图 1：封面图
 
-### 设计说明
-- **核心信息**：AI 自动生成配图
-- **视觉焦点**：AI + 图片元素
-- **情绪基调**：高效、智能、轻松
+**用途**：吸引读者，展示"AI 快速创作漫画"概念
 
-### Midjourney Prompt
+**Midjourney Prompt**：
 ```
-A creative workspace with AI assistant generating 
-beautiful illustrations on multiple screens,
-flat illustration style, purple (#6366F1) and blue 
-gradient, clean minimal composition, 
-soft ambient lighting, modern tech aesthetic
---ar 900:383 --v 6.1 --s 200
+AI robot drawing colorful comic panels on multiple floating screens,
+flat illustration style, purple and blue gradient,
+clean modern composition, soft lighting
+--ar 16:9 --v 6.1
 ```
 
-### DALL-E Prompt
-```
-A modern flat illustration of an AI-powered creative 
-workspace. Multiple floating screens display colorful 
-illustrations being generated automatically. Purple and 
-blue color scheme with clean white background. 
-Minimalist tech aesthetic with soft lighting.
-```
+**说明**：用 AI 机器人 + 漫画面板的视觉隐喻，传达"AI 辅助创作"的核心概念
 
 ---
 
-## 图 2：痛点场景图
+## 图 2：对比图
 
-### 设计说明
-- **核心信息**：配图很痛苦、耗时
-- **视觉焦点**：疲惫的创作者
-- **情绪基调**：焦虑、疲惫
+**用途**：展示传统 vs AI 的时间对比
 
-### Midjourney Prompt
+**Midjourney Prompt**：
 ```
-Exhausted content creator staring at blank canvas,
-surrounded by rejected image drafts and coffee cups,
-flat illustration, muted gray tones with orange accents,
-messy desk composition, dramatic side lighting
---ar 16:9 --v 6.1 --s 200
-```
+Split screen comparison, left side: exhausted artist with messy desk,
+right side: relaxed person with AI assistant, 
+flat illustration, contrasting colors, clean layout
+--ar 16:9 --v 6.1
 ```
 
-## 参考资源
+**说明**：左右对比构图，直观展示效率提升
+```
 
-- [mrgoonie/claudekit-skills](https://github.com/mrgoonie/claudekit-skills) - ai-multimodal, aesthetic skills
-- [Midjourney Prompt Guide](https://docs.midjourney.com/docs/prompts)
-- [DALL-E Best Practices](https://platform.openai.com/docs/guides/images)
+## 注意事项
+
+- Prompt 要简洁，不要超过 3 行
+- 避免在 Prompt 中包含文字内容
+- 如果生成效果不理想，调整关键词重试
+- 建议先生成 1-2 张测试效果，再批量生成
 
 ## 适用场景
 
 - 公众号文章配图
+- 知乎文章配图
 - 博客文章配图
+- 小红书图文
 - 技术文档配图
-- 产品介绍配图
-- 教程类内容配图

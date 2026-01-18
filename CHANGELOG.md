@@ -26,6 +26,17 @@
 - 新增常见问题解答
 - 新增配置自定义教程
 
+## [Unreleased]
+
+### Changed
+- 🎨 **简化 article-image-generator**：参考 baoyu-skills 设计，大幅简化使用方式
+  - 去掉复杂的表格和多平台 Prompt
+  - 只输出简洁的 Midjourney Prompt
+  - 更清晰的使用说明和示例
+  - 从"配图方案生成器"改为"配图生成器"
+
+---
+
 ## [1.0.0] - 2026-01-18
 
 ### 新增

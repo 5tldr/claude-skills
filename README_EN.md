@@ -30,7 +30,7 @@ Skills are modular capability extensions introduced by Anthropic. Write your exp
 | [douyin-script](./skills/douyin-script/) | Douyin (TikTok) short video script | Localized |
 | [ecommerce-copywriter](./skills/ecommerce-copywriter/) | E-commerce copy (Taobao/JD/Pinduoduo) | Localized |
 | [bilibili-summarizer](./skills/bilibili-summarizer/) | Bilibili video content summarizer | Localized |
-| [article-image-generator](./skills/article-image-generator/) | Article image planning + AI art prompts | Based on [claudekit-skills](https://github.com/mrgoonie/claudekit-skills) |
+| [article-image-generator](./skills/article-image-generator/) | Article image generator (input content → output Prompt) | Based on [claudekit-skills](https://github.com/mrgoonie/claudekit-skills) |
 | [knowledge-comic](./skills/knowledge-comic/) | Comic creator (8 styles × 6 layouts + character consistency) | Based on [baoyu-skills](https://github.com/JimLiu/baoyu-skills) |
 
 ### 📊 Trending Analysis (3 Skills)

@@ -38,7 +38,7 @@ Skills 是 Anthropic 推出的模块化能力扩展机制。把经验、流程�
 | [douyin-script](./skills/douyin-script/) | 抖音短视频脚本 | 本地化 |
 | [ecommerce-copywriter](./skills/ecommerce-copywriter/) | 电商文案（淘宝/京东/拼多多） | 本地化 |
 | [bilibili-summarizer](./skills/bilibili-summarizer/) | B站视频内容总结 | 本地化 |
-| [article-image-generator](./skills/article-image-generator/) | 文章配图方案 + AI 绘图 Prompt | 基于 [claudekit-skills](https://github.com/mrgoonie/claudekit-skills) |
+| [article-image-generator](./skills/article-image-generator/) | 文章配图生成器（输入内容→输出 Prompt） | 基于 [claudekit-skills](https://github.com/mrgoonie/claudekit-skills) |
 | [knowledge-comic](./skills/knowledge-comic/) | 漫画创作器（8 种风格 × 6 种布局 + 角色一致性） | 基于 [baoyu-skills](https://github.com/JimLiu/baoyu-skills) |
 
 ### 📊 热点趋势（3 个）
