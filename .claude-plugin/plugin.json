@@ -1,0 +1,27 @@
+{
+  "name": "claude-skills-cn",
+  "version": "1.0.0",
+  "description": "精选适合中国用户的 Claude Skills，包含 16 个实用 Skills：内容创作、热点趋势、开发工具、职场效率",
+  "author": "5tldr",
+  "homepage": "https://github.com/5tldr/claude-skills",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/5tldr/claude-skills.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "chinese",
+    "content-creation",
+    "xiaohongshu",
+    "wechat",
+    "douyin",
+    "comic",
+    "code-review",
+    "中文",
+    "小红书",
+    "公众号",
+    "抖音",
+    "漫画创作"
+  ]
+}
